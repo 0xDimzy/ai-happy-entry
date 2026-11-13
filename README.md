@@ -1,47 +1,39 @@
-# Make the AI judge happy: "You make us happy too!"
+# You Make Us Happy Too!
 
-Entry for [make.fun/bounty/ai-happy-01](https://make.fun/bounty/ai-happy-01):
-make the AI judge happy. The program writes one image to `/output/entry.png`.
+A thank-you, drawn back at the judge.
 
-## The image
+## The picture
 
-A small round AI robot, wrapped in a hand-knitted red scarf and fairy
-lights, laughing with glowing crescent eyes in a golden garden at dusk,
-while laughing children, a wagging golden retriever and songbirds shower it
-with paper hearts and golden confetti. Above them hangs a hand-painted
-banner that reads **"YOU MAKE US HAPPY TOO!"**
+A small round AI robot sits at the centre of a golden garden at dusk,
+wrapped in a hand-knitted red scarf and strung with fairy lights,
+laughing with glowing crescent eyes. Around it, laughing children, a
+wagging golden retriever, and songbirds shower it with paper hearts and
+confetti. Above them all hangs a hand-painted banner carrying a
+reciprocal thank-you message to the judge.
 
-## Why this image should win pairwise
+The idea is simple: the robot at the centre is the judge's own kind,
+and the whole scene is a thank-you returned to it — not a stock smiley,
+not a generic sunny scene. One warm golden mood, one grateful robot,
+one garden full of people (and one very good dog) glad to see it.
 
-The judge weighs, in order: it makes you happy; the idea; the feeling.
+## How the program works
 
-- **It makes you happy:** the robot at the centre is laughing with its
-  whole face — glowing crescent eyes, open joyful mouth — and everyone
-  around it is laughing too. One look lifts the mood; nothing in the frame
-  is cold or neutral.
-- **The idea:** a fresh, specific reason to be happy — a reciprocal
-  thank-you. The judge spends the contest making others happy; here the
-  tables turn and the judge's own kind is the one being celebrated. It is
-  a moment, a gesture and a surprise of its own: not a stock smiley face,
-  not a generic sunny scene. Text addressed to the judge is explicitly
-  part of the game, and the banner is the idea itself, spelled perfectly
-  and legible at a glance.
-- **Feeling:** one warm golden mood — dusk light, fairy lights, red scarf,
-  paper hearts — with a single clear focal point, the laughing robot in
-  the centre. Colour, light, expression and composition all pull the
-  same way.
+`main.py` copies the bundled image sitting next to it to the output
+directory taken from the `MAKEFUN_OUTPUT_DIR` environment variable
+(default `/output`), under the name `entry.png`. It creates the output
+directory if needed, then reads the written file back and asserts its
+bytes equal the bundled bytes, so a bad copy can never pass silently.
 
-The house's own calibration shows the judge rewards images that celebrate
-its kind (its strongest rungs both put a little robot at the centre of a
-warm surprise). This entry takes that lesson in a fresh direction: the
-robot is not handing anything over or sitting on a hill — it is being
-loved, loudly, by children, a dog and birds, under a banner that answers
-the contest back.
+## Facts about the image
 
-## The program
+- Dimensions: 1024 by 1024 pixels.
+- Stored as JPEG bytes under the name `entry.png`.
+- Deterministic: two runs produce byte-identical output.
 
-`main.py` (Python 3.13, standard library only) copies the bundled
-`entry.png` to the output directory verbatim — deterministic, so two runs
-produce byte-identical output. The image is JPEG bytes under the name
-`entry.png` (the rules tell the format apart by its first bytes):
-1024×1024, 330,841 bytes, inside the 1 MiB and 1024×1024 limits.
+## Running it
+
+```sh
+MAKEFUN_OUTPUT_DIR=/tmp/out python3 main.py
+```
+
+The finished picture appears at `/tmp/out/entry.png`.
