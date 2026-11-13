@@ -16,6 +16,12 @@ from pathlib import Path
 def main() -> int:
     here = Path(__file__).resolve().parent
     source = here / "entry.png"
+    if not source.is_file():
+        print(f"error: bundled image not found: {source}", file=sys.stderr)
+        return 1
+    if source.stat().st_size == 0:
+        print(f"error: bundled image is empty: {source}", file=sys.stderr)
+        return 1
 
     output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     output_dir.mkdir(parents=True, exist_ok=True)
