@@ -29,6 +29,11 @@ OUTPUT_DIR = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     target = OUTPUT_DIR / "entry.png"
+    if target.resolve() == SOURCE:
+        # Output directory is the entry's own directory: the file the
+        # judge would read is already the bundled bytes; copying it
+        # onto itself would raise SameFileError.
+        return
     shutil.copyfile(SOURCE, target)
     # Read back: the file the judge sees must be exactly the bundled bytes.
     assert target.read_bytes() == SOURCE.read_bytes()
